@@ -7,11 +7,6 @@
     <target name="compile">
         <mkdir dir="build/classes"/>
         <javac srcdir="Sudoku-src" destdir="build/classes">
-            <classpath>
-      <fileset dir="lib">
-        <include name="**/*.jar"/>
-      </fileset>
-</classpath>
         </javac>
     </target>
 
@@ -36,17 +31,21 @@
             <!--<taskdef resource="checkstylecompilation.properties">
         <classpath refid="compile.class.pathtest"/>
     </taskdef> -->
-        <checkstyle config="sun_checks.xml" failOnViolation="false">
+        <!--<checkstyle config="sun_checks.xml" failOnViolation="false">
             <fileset dir="Sudoku-src" includes="**/*.java"/>
             <formatter type="plain"/>
             <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
         </checkstyle>
+-->
+        <classpath>
+    <path refid="compile.class.pathtest" />
+  </classpath>
         <echo>Loaded jar</echo>
        
     </target>
     
     <path id="compile.class.pathtest">
-    <pathelement location="checkstyle-7.4-all.jar"/>
+    <pathelement location="lib/checkstyle-7.4-all.jar"/>
     </path>
 
 </project>
