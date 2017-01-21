@@ -21,12 +21,13 @@
     
     <!--<project name="Build" default="build" basedir="."> 
 
-    <property file="props.properties"/> -->
+    <property file="props.properties"/> 
 
-    <taskdef resource="checkstyletask.properties" classpath="checkstyle-7.4-all.jar"/>
+    <taskdef resource="checkstyletask.properties" classpath="checkstyle-7.4-all.jar"/> -->
 
     <target name="checkstyle">
         <echo>Starting checkstyle</echo>
+        <zipgroupfileset dir="lib" includes="**/*.jar"/>
         <checkstyle config="sun_checks.xml" failOnViolation="false">
             <fileset dir="Sudoku-src" includes="**/*.java"/>
             <formatter type="plain"/>
