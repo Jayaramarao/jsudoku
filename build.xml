@@ -23,7 +23,7 @@
 
     <property file="props.properties"/> -->
 
-    <taskdef resource="checkstyletask.properties" classpath="${checkstyle.jar.path}"/>
+    <taskdef resource="checkstyletask.properties" classpath="checkstyle-7.4-all.jar"/>
 
     <target name="checkstyle">
         <echo>Starting checkstyle</echo>
