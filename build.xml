@@ -18,5 +18,21 @@
     <target name="run">
         <java jar="build/jar/Sudoku.jar" fork="true"/>
     </target>
+    
+    <!--<project name="Build" default="build" basedir="."> 
+
+    <property file="props.properties"/> -->
+
+    <taskdef resource="checkstyletask.properties" classpath="${checkstyle.jar.path}"/>
+
+    <target name="checkstyle">
+        <echo>Starting checkstyle</echo>
+        <checkstyle config="rules/sun_checks.xml" failOnViolation="false">
+            <fileset dir="src" includes="**/*.java"/>
+            <formatter type="plain"/>
+            <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
+        </checkstyle>
+        <echo>Checkstyle finished</echo>
+    </target>
 
 </project>
