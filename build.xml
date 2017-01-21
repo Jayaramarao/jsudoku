@@ -27,7 +27,10 @@
 
     <target name="checkstyle">
         <echo>Starting checkstyle</echo>
-        <zipgroupfileset dir="lib" includes="**/*.jar"/>
+            <taskdef resource="checkstyletask.properties">
+        <classpath refid="compile.class.pathtest"/>
+    </taskdef>
+        <echo>Loaded jar</echo>
         <checkstyle config="sun_checks.xml" failOnViolation="false">
             <fileset dir="Sudoku-src" includes="**/*.java"/>
             <formatter type="plain"/>
@@ -35,5 +38,9 @@
         </checkstyle>
         <echo>Checkstyle finished</echo>
     </target>
+    
+    <path id="compile.class.pathtest">
+    <pathelement location="lib/checkstyle-7.4-all.jar"/>
+    </path>
 
 </project>
