@@ -27,8 +27,8 @@
 
     <target name="checkstyle">
         <echo>Starting checkstyle</echo>
-        <checkstyle config="rules/sun_checks.xml" failOnViolation="false">
-            <fileset dir="src" includes="**/*.java"/>
+        <checkstyle config="sun_checks.xml" failOnViolation="false">
+            <fileset dir="Sudoku-src" includes="**/*.java"/>
             <formatter type="plain"/>
             <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
         </checkstyle>
