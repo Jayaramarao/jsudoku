@@ -6,8 +6,7 @@
 	<property name="build.dir" location="bin" />
 	<property name="dist.dir" location="jar" />
 	<property name="projectName" value="jSudoku" />
-	<property name="main-class" value="src.main.java.test" />
-	<property name="resource.dir" location="src/main/resources" />
+	<property name="resource.dir" location="Sudoku-src/main/resources" />
 	<property name="build.test.checkstyle.results.dir" location="bin/checkstyles/report" />
 
 
@@ -23,9 +22,6 @@
 	<target name="jar" depends="compile" description="package, output to JAR">
 
 		<jar jarfile="${dist.dir}/${projectName}.jar" basedir="${build.dir}">
-			<manifest>
-				<attribute name="Main-Class" value="${main-class}" />
-			</manifest>
 		</jar>
 
 	</target>
