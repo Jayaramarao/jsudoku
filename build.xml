@@ -1,51 +1,56 @@
-<project>
+<project default="main">
+	<description>
+		Create a Java Project (JAR) with Ant build script
+	</description>
+	<property name="src.dir" location="src" />
+	<property name="build.dir" location="bin" />
+	<property name="dist.dir" location="jar" />
+	<property name="projectName" value="TestJenkins" />
+	<property name="main-class" value="src.main.java.test" />
+	<property name="resource.dir" location="src/main/resources" />
+	<property name="build.test.checkstyle.results.dir" location="bin/checkstyles/report" />
 
-    <target name="clean">
-        <delete dir="build"/>
-    </target>
 
-    <target name="compile">
-        <mkdir dir="build/classes"/>
-        <javac srcdir="Sudoku-src" destdir="build/classes">
-        </javac>
-    </target>
+	<target name="init">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.test.checkstyle.results.dir}" />
+	</target>
 
-    <target name="jar">
-        <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/Sudoku.jar" basedir="build/classes">
-        </jar>
-    </target>
+	<target name="compile" depends="init" description="compile the source ">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}" />
+	</target>
 
-    <target name="run">
-        <java jar="build/jar/Sudoku.jar" fork="true"/>
-    </target>
-    
-    <!--<project name="Build" default="build" basedir="."> 
+	<target name="jar" depends="compile" description="package, output to JAR">
 
-    <property file="props.properties"/> 
+		<jar jarfile="${dist.dir}/${projectName}.jar" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
 
-    <taskdef resource="checkstyletask.properties" classpath="checkstyle-7.4-all.jar"/> -->
+	</target>
+	<target name="clean" description="clean up">
+		<delete dir="${build.dir}" />
+	</target>
 
-    <target name="checkstyle" depends="compile">
-        <echo>Starting checkstyle</echo>
-            <!--<taskdef resource="checkstylecompilation.properties">
-        <classpath refid="compile.class.pathtest"/>
-    </taskdef> -->
-        <!--<checkstyle config="sun_checks.xml" failOnViolation="false">
-            <fileset dir="Sudoku-src" includes="**/*.java"/>
-            <formatter type="plain"/>
-            <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
-        </checkstyle>
--->
-        <classpath>
-    <path refid="compile.class.pathtest" />
-  </classpath>
-        <echo>Loaded jar</echo>
-       
-    </target>
-    
-    <path id="compile.class.pathtest">
-    <pathelement location="lib/checkstyle-7.4-all.jar"/>
-    </path>
+	<target name="pmd" depends="" description="checkstyle violations in source code">
+		<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties">
+			<classpath refid="compile.class.pathtest" />
+		</taskdef>
+		<checkstyle config="${resource.dir}/sun_checks.xml" failonviolation="false">
+			<fileset dir="${src.dir}" includes="**/*.java" />
+			<formatter type="plain" />
+			<formatter type="xml" toFile="${build.test.checkstyle.results.dir}/checkstyle_errors.xml" />
+		</checkstyle>
+	</target>
+
+
+	<!-- Default, run this -->
+	<target name="main" depends="clean, compile, jar, pmd" />
+
+
+	<path id="compile.class.pathtest">
+		<pathelement location="lib/checkstyle-7.4-all.jar" />
+	</path>
 
 </project>
