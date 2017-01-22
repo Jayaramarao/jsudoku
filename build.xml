@@ -5,7 +5,7 @@
 	<property name="src.dir" location="Sudoku-src" />
 	<property name="build.dir" location="bin" />
 	<property name="dist.dir" location="jar" />
-	<property name="projectName" value="TestJenkins" />
+	<property name="projectName" value="jSudoku" />
 	<property name="main-class" value="src.main.java.test" />
 	<property name="resource.dir" location="src/main/resources" />
 	<property name="build.test.checkstyle.results.dir" location="bin/checkstyles/report" />
