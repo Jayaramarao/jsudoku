@@ -2,7 +2,7 @@
 	<description>
 		Create a Java Project (JAR) with Ant build script
 	</description>
-	<property name="src.dir" location="src" />
+	<property name="src.dir" location="Sudoku-src" />
 	<property name="build.dir" location="bin" />
 	<property name="dist.dir" location="jar" />
 	<property name="projectName" value="TestJenkins" />
